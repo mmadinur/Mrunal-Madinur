@@ -38,7 +38,7 @@ body{
    ------------------------- */
 .site-header{
   border-bottom: 1px solid rgba(0,0,0,0.06);
-  padding: 24px 0;             /* space above content — makes the header "high" */
+  padding: 10px 0;             /* space above content — makes the header "high" */
   background: transparent;
 }
 .header-inner{
