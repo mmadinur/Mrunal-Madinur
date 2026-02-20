@@ -45,8 +45,9 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap: 18px;
+  padding: 0 40px;  /* controls distance from edge */
 }
+
 
 /* Branding: small name + subtitle */
 .brand{
