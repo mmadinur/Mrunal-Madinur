@@ -19,8 +19,8 @@ html,body{ height:100%; }
 body{
   margin:0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: var(--bg);
-  color: #0b1220;
+  background-color: #000;
+  color: #fff;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
@@ -37,9 +37,9 @@ body{
    (place this directly after <body>)
    ------------------------- */
 .site-header{
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid rgba(255,255,255,0.1); /* subtle white divider */
   padding: 24px 0 36px 0;
-  background: transparent;
+  background: #000;
 }
 .header-inner{
   display:flex;
