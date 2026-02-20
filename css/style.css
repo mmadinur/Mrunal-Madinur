@@ -1,4 +1,4 @@
-/* Minimal, elegant writing site */
+/* css/style.css — cleaned, minimal, elegant */
 
 :root{
   --maxw: 760px;
@@ -12,6 +12,8 @@
 }
 
 *{ box-sizing:border-box; }
+
+html,body{height:100%}
 
 body{
   margin:0;
@@ -27,15 +29,6 @@ body{
 .container{
   max-width:var(--maxw);
   width:100%;
-}
-
-/* Header */
-
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:40px;
 }
 
 /* ---- Site header (shared across pages) ---- */
@@ -63,6 +56,16 @@ body{
   color:var(--muted);
   margin-top:4px;
 }
+
+/* fallback/other title style (used inside content pages if present) */
+.name{
+  font-size:34px;
+  font-weight:700;
+  letter-spacing:-0.5px;
+  margin:0;
+}
+
+/* nav */
 .nav{display:flex;gap:14px;align-items:center}
 .nav a{
   font-size:15px;
@@ -79,32 +82,8 @@ body{
   transform: translateY(-1px);
   outline:none;
 }
-@media (max-width:720px){
-  .header-inner{flex-direction:column;align-items:flex-start}
-  .site-title{font-size:20px}
-}
-
-.name{
-  font-size:34px;
-  font-weight:700;
-  letter-spacing:-0.5px;
-  margin:0;
-}
-
-.nav a{
-  margin-left:20px;
-  font-size:15px;
-  text-decoration:none;
-  color:var(--muted);
-  transition:color .2s ease;
-}
-
-.nav a:hover{
-  color:var(--accent);
-}
 
 /* Main text */
-
 .lead{
   font-size:20px;
   margin-bottom:40px;
@@ -112,28 +91,23 @@ body{
 }
 
 /* Post list */
-
 .article-list{
   list-style:none;
   padding:0;
   margin:0;
 }
-
 .article-list li{
   padding:18px 0;
   border-bottom:1px solid #eee;
 }
-
 .article-list a{
   text-decoration:none;
   font-weight:600;
   color:#111;
 }
-
 .article-list a:hover{
   color:var(--accent);
 }
-
 .article-date{
   font-size:14px;
   color:var(--muted);
@@ -141,7 +115,6 @@ body{
 }
 
 /* Footer */
-
 .footer{
   margin-top:60px;
   padding-top:20px;
@@ -150,12 +123,14 @@ body{
   color:var(--muted);
 }
 
-/* Mobile */
-
-@media (max-width:700px){
-  .header{
+/* Responsive */
+@media (max-width:720px){
+  .header-inner{
     flex-direction:column;
     align-items:flex-start;
-    gap:12px;
   }
+  .site-title{font-size:20px}
+  body{padding:36px 16px}
+  .name{font-size:28px}
+  .lead{font-size:16px}
 }
