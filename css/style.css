@@ -95,7 +95,7 @@ font-family: Georgia, "Times New Roman", serif;  background-color: var(--bg);
 .nav-link[aria-current="page"]{
   color: #ffffff;
   font-weight:600;
-  background: rgba(255,255,255,0.12);
+  background: none;
 }
 
 /* -------------------------
