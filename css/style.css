@@ -38,6 +38,52 @@ body{
   margin-bottom:40px;
 }
 
+/* ---- Site header (shared across pages) ---- */
+.site-header{
+  padding: 28px 0 20px;
+  border-bottom: 1px solid rgba(11,18,32,0.04);
+  background: transparent;
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.brand{display:flex;flex-direction:column}
+.site-title{
+  font-size:18px;
+  font-weight:600;
+  color:#0b1220;
+  text-decoration:none;
+  letter-spacing:-0.01em;
+}
+.site-sub{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:4px;
+}
+.nav{display:flex;gap:14px;align-items:center}
+.nav a{
+  font-size:15px;
+  color:var(--muted);
+  text-decoration:none;
+  padding:6px 8px;
+  border-radius:8px;
+  transition:color .16s ease, background .16s ease, transform .12s ease;
+}
+.nav a:hover,
+.nav a:focus{
+  color:var(--accent);
+  background: rgba(11,41,72,0.04);
+  transform: translateY(-1px);
+  outline:none;
+}
+@media (max-width:720px){
+  .header-inner{flex-direction:column;align-items:flex-start}
+  .site-title{font-size:20px}
+}
+
 .name{
   font-size:34px;
   font-weight:700;
