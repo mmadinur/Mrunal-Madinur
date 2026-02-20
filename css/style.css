@@ -1,136 +1,81 @@
-/* css/style.css — cleaned, minimal, elegant */
+/* Clean minimalist writing layout */
 
 :root{
   --maxw: 760px;
   --accent: #0b2948;
   --muted: #6b7280;
   --bg: #ffffff;
-  --card: #f9fafb;
-  --shadow: 0 8px 24px rgba(0,0,0,0.04);
   font-size: 18px;
   line-height: 1.65;
 }
 
 *{ box-sizing:border-box; }
 
-html,body{height:100%}
-
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial;
   background:var(--bg);
   color:#0b1220;
-  display:flex;
-  justify-content:center;
-  padding:64px 20px;
   -webkit-font-smoothing:antialiased;
 }
 
+/* Shared container */
 .container{
   max-width:var(--maxw);
-  width:100%;
+  margin:0 auto;
+  padding:0 20px;
 }
 
-/* ---- Site header (shared across pages) ---- */
+/* Header */
 .site-header{
-  padding: 28px 0 20px;
-  border-bottom: 1px solid rgba(11,18,32,0.04);
-  background: transparent;
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  padding:24px 0;
 }
+
 .header-inner{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:20px;
+  align-items:center;
 }
-.brand{display:flex;flex-direction:column}
+
 .site-title{
   font-size:18px;
   font-weight:600;
-  color:#0b1220;
   text-decoration:none;
-  letter-spacing:-0.01em;
+  color:#111;
 }
+
 .site-sub{
   font-size:13px;
   color:var(--muted);
   margin-top:4px;
 }
 
-/* fallback/other title style (used inside content pages if present) */
-.name{
-  font-size:34px;
-  font-weight:700;
-  letter-spacing:-0.5px;
-  margin:0;
-}
-
-/* nav */
-.nav{display:flex;gap:14px;align-items:center}
 .nav a{
+  text-decoration:none;
+  color:var(--muted);
+  margin-left:16px;
   font-size:15px;
-  color:var(--muted);
-  text-decoration:none;
-  padding:6px 8px;
-  border-radius:8px;
-  transition:color .16s ease, background .16s ease, transform .12s ease;
-}
-.nav a:hover,
-.nav a:focus{
-  color:var(--accent);
-  background: rgba(11,41,72,0.04);
-  transform: translateY(-1px);
-  outline:none;
 }
 
-/* Main text */
+.nav a:hover{
+  color:var(--accent);
+}
+
+/* Main */
+main{
+  padding:60px 0;
+}
+
 .lead{
-  font-size:20px;
-  margin-bottom:40px;
+  font-size:22px;
   max-width:60ch;
-}
-
-/* Post list */
-.article-list{
-  list-style:none;
-  padding:0;
-  margin:0;
-}
-.article-list li{
-  padding:18px 0;
-  border-bottom:1px solid #eee;
-}
-.article-list a{
-  text-decoration:none;
-  font-weight:600;
-  color:#111;
-}
-.article-list a:hover{
-  color:var(--accent);
-}
-.article-date{
-  font-size:14px;
-  color:var(--muted);
-  margin-left:8px;
 }
 
 /* Footer */
 .footer{
-  margin-top:60px;
-  padding-top:20px;
-  border-top:1px solid #eee;
+  border-top:1px solid rgba(0,0,0,0.06);
+  padding:30px 0;
   font-size:14px;
   color:var(--muted);
-}
-
-/* Responsive */
-@media (max-width:720px){
-  .header-inner{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-  .site-title{font-size:20px}
-  body{padding:36px 16px}
-  .name{font-size:28px}
-  .lead{font-size:16px}
 }
