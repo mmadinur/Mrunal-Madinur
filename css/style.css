@@ -37,8 +37,8 @@ body{
    (place this directly after <body>)
    ------------------------- */
 .site-header{
-  border-bottom: 1px solid #000;
-  padding: 36px 0 36px 0;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 24px 0 36px 0;
   background: transparent;
 }
 .header-inner{
