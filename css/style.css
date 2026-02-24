@@ -4,7 +4,7 @@
    Variables & base
    ------------------------- */
 :root{
-  --maxw: 100%;               /* changed from 760px → allow full width */
+  --maxw: 760px;
   --accent: #ffffff;
   --muted: rgba(255,255,255,0.6);
   --bg: #24282E;
@@ -18,19 +18,17 @@ html,body{ height:100%; }
 
 body{
   margin:0;
-  font-family: Georgia, "Times New Roman", serif;
-  background-color: var(--bg);
+font-family: Georgia, "Times New Roman", serif;  background-color: var(--bg);
   color: #ffffff;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
 
-/* Shared centered container — changed to allow full-width layout */
+/* Shared centered container */
 .container{
-  width: 100%;
-  max-width: none;     /* remove the 760px constraint */
-  margin: 0;           /* don't center this container */
-  padding: 0 40px;     /* horizontal breathing room; tweak as needed */
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 /* -------------------------
@@ -103,12 +101,10 @@ body{
 /* -------------------------
    Main content
    ------------------------- */
-/* main/.content now free to expand; padding keeps text away from edges */
 main, .content {
-  padding: 60px 40px;  /* adjust the '40px' to change side padding */
-  max-width: none;     /* explicit: no width constraint */
-  margin: 0;           /* don't auto-center */
-  width: 100%;
+  padding: 60px 0;
+  max-width: 60ch;
+  margin: 0 auto;
 }
 
 .hero-title{
@@ -186,9 +182,8 @@ main, .content {
     padding:6px 8px;
   }
 
-  /* on smaller screens use smaller horizontal padding so content fits nicely */
   main, .content{
-    padding: 28px 20px;
+    padding: 28px 0;
   }
 
   .hero-title{
