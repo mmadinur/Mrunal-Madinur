@@ -102,9 +102,9 @@ font-family: Georgia, "Times New Roman", serif;  background-color: var(--bg);
    Main content
    ------------------------- */
 main, .content {
-  padding: 60px 0;
-  max-width: 60ch;
-  margin: 0 auto;
+  padding: 60px 40px;  /* keeps spacing from edges */
+  max-width: none;     /* remove width constraint */
+  margin: 0;           /* remove centering */
 }
 
 .hero-title{
