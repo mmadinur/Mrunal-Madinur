@@ -200,3 +200,56 @@ a:focus{
   outline: 2px solid rgba(255,255,255,0.4);
   outline-offset:4px;
 }
+
+/* ICONIQ Reflection — Takeaways styling */
+.blog-content {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-top: 8px;
+}
+
+/* Large white "Takeaways" title */
+.takeaways-title {
+  font-size: 3rem;           /* large and prominent */
+  font-weight: 800;
+  color: var(--accent);
+  margin: 48px 0 18px 0;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Each takeaway block */
+.takeaway {
+  margin-bottom: 18px;
+}
+
+/* Takeaway headers — large but below the main Takeaways title */
+.takeaway h3 {
+  font-size: 1.5rem;         /* distinct and bold */
+  font-weight: 700;
+  margin: 18px 0 6px 0;
+  color: var(--accent);
+}
+
+/* Takeaway descriptions — smaller, readable, slightly muted */
+.takeaway p {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0;
+  max-width: 60ch;
+}
+
+/* Improve spacing for small screens */
+@media (max-width: 820px) {
+  .takeaways-title {
+    font-size: 2.25rem;
+    margin-top: 28px;
+  }
+  .takeaway h3 {
+    font-size: 1.125rem;
+  }
+  .takeaway p {
+    font-size: 0.98rem;
+  }
+}
