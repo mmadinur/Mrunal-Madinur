@@ -24,11 +24,10 @@ font-family: Georgia, "Times New Roman", serif;  background-color: var(--bg);
   -moz-osx-font-smoothing:grayscale;
 }
 
-/* Shared centered container */
 .container{
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 0 20px;
+  max-width: none;
+  margin: 0;
+  padding: 0 40px;   /* align with header-inner */
 }
 
 /* -------------------------
@@ -103,8 +102,9 @@ font-family: Georgia, "Times New Roman", serif;  background-color: var(--bg);
    ------------------------- */
 main, .content {
   padding: 60px 40px;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: none;   /* remove width restriction */
+  width: 100%;
+  margin: 0;
 }
 
 .hero-title{
