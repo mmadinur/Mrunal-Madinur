@@ -24,10 +24,11 @@ font-family: Georgia, "Times New Roman", serif;  background-color: var(--bg);
   -moz-osx-font-smoothing:grayscale;
 }
 
+/* Shared centered container */
 .container{
-  max-width: none;
-  margin: 0;
-  padding: 0 40px;   /* align with header-inner */
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 /* -------------------------
@@ -101,10 +102,9 @@ font-family: Georgia, "Times New Roman", serif;  background-color: var(--bg);
    Main content
    ------------------------- */
 main, .content {
-  padding: 60px 40px;
-  max-width: none;   /* remove width restriction */
-  width: 100%;
-  margin: 0;
+  padding: 60px 40px;     /* adds left/right breathing room */
+  max-width: 1100px;      /* allows text to stretch wide */
+  margin: 0 auto;         /* keeps it centered overall */
 }
 
 .hero-title{
@@ -200,4 +200,3 @@ a:focus{
   outline: 2px solid rgba(255,255,255,0.4);
   outline-offset:4px;
 }
-
