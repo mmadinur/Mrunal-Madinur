@@ -201,30 +201,4 @@ a:focus{
   outline-offset:4px;
 }
 
-/* Subheader (Takeaways) */
-.subheader {
-  font-size: 26px;
-  font-weight: 700;
-  margin-top: 60px;
-  margin-bottom: 20px;
-  letter-spacing: -0.01em;
-}
 
-/* Individual takeaway blocks */
-.takeaway {
-  margin-bottom: 32px;
-}
-
-/* Numbered headers */
-.takeaway h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-/* Description text */
-.takeaway p {
-  font-size: 16px;
-  color: var(--muted);
-  margin-bottom: 12px;
-}
