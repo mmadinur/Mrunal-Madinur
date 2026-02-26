@@ -52,7 +52,7 @@ body{
 .container{
   max-width: var(--maxw);            /* Limits width to 760px */
   margin: 0 auto;                    /* Centers container */
-  padding: 0 0px;                   /* Adds left/right breathing room */
+  padding: 0 -20px;                   /* Adds left/right breathing room */
 }
 
 
