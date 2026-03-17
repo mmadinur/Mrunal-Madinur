@@ -266,6 +266,13 @@ main, .content {
    Perspectives BLOG IMAGES
    ========================================================= */
 
+.image-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 32px 0;
+}
+
 .image-figure {
   margin: 0;
 }
@@ -289,6 +296,12 @@ figcaption {
   font-style: italic;
   margin-top: 8px;
   text-align: center;
+}
+
+@media (max-width: 820px) {
+  .image-pair {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* =========================================================
