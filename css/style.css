@@ -275,13 +275,15 @@ main, .content {
 
 .image-figure {
   margin: 0;
+  overflow: hidden;
+  border-radius: 6px;
 }
 
 .blog-image {
   width: 100%;
   height: auto;
-  border-radius: 6px;
   display: block;
+  margin-bottom: -40px;
 }
 
 figcaption {
