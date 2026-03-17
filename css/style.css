@@ -10,7 +10,7 @@
    ========================================================= */
 
 :root {
-  --maxw: 760px;
+  --maxw: 1100px;
   --accent: #f0ece4;
   --muted: rgba(240, 236, 228, 0.45);
   --bg: #0a0a0a;
@@ -39,9 +39,24 @@ body {
   color: var(--accent);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  /* Subtle grain texture for depth */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+
+/* =========================================================
+   SHARED CENTERED WRAPPER
+   Both header-inner and main use this same width + padding
+   ========================================================= */
+
+.header-inner,
+main,
+.content,
+.footer > div,
+.footer {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 
@@ -50,9 +65,7 @@ body {
    ========================================================= */
 
 .container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 40px;
+  max-width: 100%;
 }
 
 
@@ -70,9 +83,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 40px;
-  max-width: 1100px;
-  margin: 0 auto;
 }
 
 
@@ -146,15 +156,13 @@ body {
    ========================================================= */
 
 main, .content {
-  padding: 64px 40px 48px;
-  max-width: 1100px;
-  margin: 0 auto;
+  padding-top: 64px;
+  padding-bottom: 48px;
 }
 
 
 /* =========================================================
-   EYEBROW LABEL (small uppercase label above headlines)
-   Add <p class="eyebrow"> above your hero title
+   EYEBROW LABEL
    ========================================================= */
 
 .eyebrow {
@@ -198,8 +206,7 @@ main, .content {
 
 
 /* =========================================================
-   THIN DIVIDER (optional, place before article list)
-   Add <div class="divider"></div> in your HTML
+   THIN DIVIDER
    ========================================================= */
 
 .divider {
@@ -211,7 +218,7 @@ main, .content {
 
 
 /* =========================================================
-   ARTICLE LIST (Homepage)
+   ARTICLE LIST
    ========================================================= */
 
 .article-list {
@@ -244,7 +251,6 @@ main, .content {
   letter-spacing: -0.01em;
 }
 
-/* Smooth underline on hover instead of opacity shift */
 .article-list a::after {
   content: '';
   position: absolute;
@@ -260,7 +266,6 @@ main, .content {
   width: 100%;
 }
 
-/* Optional tag/category below each title */
 .article-tag {
   font-family: 'Lora', serif;
   font-size: 11px;
@@ -293,64 +298,6 @@ main, .content {
   font-style: italic;
 }
 
-
-/* =========================================================
-   RESPONSIVE (Mobile)
-   ========================================================= */
-
-@media (max-width: 820px) {
-
-  .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .site-title {
-    font-size: 18px;
-  }
-
-  .primary-nav {
-    width: 100%;
-    justify-content: flex-start;
-    gap: 4px 8px;
-  }
-
-  .nav-link {
-    padding: 5px 8px;
-  }
-
-  main, .content {
-    padding: 32px 0;
-  }
-
-  .hero-title {
-    font-size: 26px;
-  }
-
-  .lead {
-    font-size: 15px;
-  }
-
-  .article-list li {
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .article-date {
-    font-size: 11px;
-  }
-}
-
-
-/* =========================================================
-   ACCESSIBILITY
-   ========================================================= */
-
-a:focus {
-  outline: 2px solid rgba(255, 255, 255, 0.3);
-  outline-offset: 4px;
-}
 
 /* =========================================================
    TWO-COLUMN LAYOUT
@@ -424,11 +371,63 @@ a:focus {
   color: #f0ece4;
 }
 
+
 /* =========================================================
-   RESPONSIVE — stack sidebar below on mobile
+   RESPONSIVE (Mobile)
    ========================================================= */
 
 @media (max-width: 820px) {
+
+  .header-inner,
+  main,
+  .content,
+  .footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .site-title {
+    font-size: 18px;
+  }
+
+  .primary-nav {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 4px 8px;
+  }
+
+  .nav-link {
+    padding: 5px 8px;
+  }
+
+  main, .content {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .hero-title {
+    font-size: 26px;
+  }
+
+  .lead {
+    font-size: 15px;
+  }
+
+  .article-list li {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .article-date {
+    font-size: 11px;
+  }
+
   .two-col {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -440,4 +439,14 @@ a:focus {
     padding-left: 0;
     padding-top: 28px;
   }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+a:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.3);
+  outline-offset: 4px;
 }
