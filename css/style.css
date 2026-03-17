@@ -10,10 +10,10 @@
    ========================================================= */
 
 :root {
-  --maxw: 1100px;
   --accent: #f0ece4;
   --muted: rgba(240, 236, 228, 0.45);
   --bg: #0a0a0a;
+  --side: 48px;
 
   font-size: 18px;
   line-height: 1.7;
@@ -44,32 +44,6 @@ body {
 
 
 /* =========================================================
-   SHARED CENTERED WRAPPER
-   Both header-inner and main use this same width + padding
-   ========================================================= */
-
-.header-inner,
-main,
-.content,
-.footer > div,
-.footer {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
-
-/* =========================================================
-   MAIN PAGE WRAPPER
-   ========================================================= */
-
-.container {
-  max-width: 100%;
-}
-
-
-/* =========================================================
    HEADER
    ========================================================= */
 
@@ -83,6 +57,7 @@ main,
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 var(--side);
 }
 
 
@@ -152,8 +127,12 @@ main,
 
 
 /* =========================================================
-   MAIN CONTENT AREA
+   CONTAINER + MAIN
    ========================================================= */
+
+.container {
+  padding: 0 var(--side);
+}
 
 main, .content {
   padding-top: 64px;
@@ -201,7 +180,6 @@ main, .content {
   color: var(--muted);
   line-height: 1.75;
   font-style: italic;
-  max-width: 560px;
 }
 
 
@@ -305,8 +283,8 @@ main, .content {
 
 .two-col {
   display: grid;
-  grid-template-columns: 1fr 200px;
-  gap: 48px;
+  grid-template-columns: 1fr 240px;
+  gap: 64px;
   align-items: start;
 }
 
@@ -378,12 +356,8 @@ main, .content {
 
 @media (max-width: 820px) {
 
-  .header-inner,
-  main,
-  .content,
-  .footer {
-    padding-left: 20px;
-    padding-right: 20px;
+  :root {
+    --side: 20px;
   }
 
   .header-inner {
