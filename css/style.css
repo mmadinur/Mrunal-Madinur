@@ -349,3 +349,93 @@ a:focus {
   outline: 2px solid rgba(255, 255, 255, 0.3);
   outline-offset: 4px;
 }
+
+/* =========================================================
+   TWO-COLUMN LAYOUT
+   ========================================================= */
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 48px;
+  align-items: start;
+}
+
+.col-main {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.col-sidebar {
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  padding-left: 28px;
+  padding-top: 4px;
+}
+
+.sidebar-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  color: #f0ece4;
+  margin-bottom: 14px;
+}
+
+.sidebar-bio {
+  font-family: 'Lora', serif;
+  font-size: 13px;
+  color: rgba(240, 236, 228, 0.42);
+  font-style: italic;
+  line-height: 1.7;
+  margin: 0 0 18px 0;
+}
+
+.sidebar-label {
+  font-family: 'Lora', serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(240, 236, 228, 0.25);
+  margin-bottom: 8px;
+}
+
+.sidebar-link {
+  display: block;
+  font-family: 'Lora', serif;
+  font-size: 13px;
+  color: rgba(240, 236, 228, 0.45);
+  text-decoration: none;
+  margin-bottom: 6px;
+  transition: color 0.16s ease;
+}
+
+.sidebar-link:hover {
+  color: #f0ece4;
+}
+
+/* =========================================================
+   RESPONSIVE — stack sidebar below on mobile
+   ========================================================= */
+
+@media (max-width: 820px) {
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .col-sidebar {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-left: 0;
+    padding-top: 28px;
+  }
+}
