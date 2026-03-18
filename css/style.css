@@ -492,6 +492,71 @@ html.light .theme-toggle:hover {
   background: rgba(0, 0, 0, 0.06);
 }
 
+/* =========================================================
+   LIGHT MODE — TEXT COLOR FIXES
+   ========================================================= */
+
+html.light .site-title {
+  color: #111111;
+}
+
+html.light .hero-title {
+  color: #111111;
+}
+
+html.light .article-list a {
+  color: #111111;
+}
+
+html.light .article-tag {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+html.light .article-date {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+html.light .sidebar-avatar {
+  color: #111111;
+  background: rgba(0, 0, 0, 0.07);
+}
+
+html.light .sidebar-bio {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+html.light .sidebar-label {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+html.light .sidebar-link {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+html.light .sidebar-link:hover {
+  color: #111111;
+}
+
+html.light .nav-link {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+html.light .nav-link:hover,
+html.light .nav-link[aria-current="page"] {
+  color: #111111;
+}
+
+html.light .footer {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+html.light .eyebrow {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+html.light .lead {
+  color: rgba(0, 0, 0, 0.55);
+}
 
 /* =========================================================
    RESPONSIVE (Mobile)
