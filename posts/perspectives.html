@@ -155,5 +155,30 @@
 </footer>
 
 </div>
+
+  <script>
+  const bar = document.createElement('div');
+  bar.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: rgba(255,255,255,0.7);
+    z-index: 9999;
+    border-radius: 0 2px 2px 0;
+    transition: width 0.05s linear;
+    pointer-events: none;
+  `;
+  document.body.appendChild(bar);
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = pct + '%';
+  });
+</script>
+  
 </body>
 </html>
