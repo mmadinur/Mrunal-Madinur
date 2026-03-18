@@ -156,7 +156,11 @@
 
 </div>
 
-  <script>
+<!-- =====================================================
+     READING PROGRESS BAR
+     Thin white line at top of page that fills as you scroll
+     ===================================================== -->
+<script>
   const bar = document.createElement('div');
   bar.style.cssText = `
     position: fixed;
@@ -172,11 +176,45 @@
   `;
   document.body.appendChild(bar);
 
+  // Update bar width based on how far down the page you've scrolled
   window.addEventListener('scroll', () => {
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
     bar.style.width = pct + '%';
+  });
+</script>
+
+<!-- =====================================================
+     CURSOR GLOW
+     Soft white radial glow that follows the mouse cursor
+     ===================================================== -->
+<script>
+  const glow = document.createElement('div');
+  glow.style.cssText = `
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+  `;
+  document.body.appendChild(glow);
+
+  // Move glow to follow the cursor
+  document.addEventListener('mousemove', (e) => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+    glow.style.opacity = '1';
+  });
+
+  // Hide glow when cursor leaves the page
+  document.addEventListener('mouseleave', () => {
+    glow.style.opacity = '0';
   });
 </script>
   
