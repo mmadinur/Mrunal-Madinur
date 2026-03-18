@@ -8,6 +8,81 @@
     <link rel="icon" type="image/png" href="../favicon.png?v=4">
 
 </head>
+
+
+  <!-- =====================================================
+     CONSTELLATION TRAIL
+     Dots connect with lines as you move the mouse,
+     forming a star-map style trail that fades out
+     ===================================================== -->
+<script>
+  let dots = [];
+  const MAX_DOTS = 12;
+  const MAX_DIST = 80;
+
+  document.addEventListener('mousemove', (e) => {
+    // Create a new dot at cursor position
+    const dot = document.createElement('div');
+    dot.style.cssText = `
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 50%;
+      left: ${e.clientX}px;
+      top: ${e.clientY}px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9997;
+    `;
+    document.body.appendChild(dot);
+    dots.push({ el: dot, x: e.clientX, y: e.clientY });
+
+    // Remove oldest dot if over limit
+    if (dots.length > MAX_DOTS) {
+      const old = dots.shift();
+      old.el.remove();
+    }
+
+    // Remove old lines
+    document.querySelectorAll('.c-line').forEach(l => l.remove());
+
+    // Draw lines between nearby dots
+    for (let i = 1; i < dots.length; i++) {
+      const a = dots[i - 1];
+      const b = dots[i];
+      const dist = Math.hypot(b.x - a.x, b.y - a.y);
+      if (dist < MAX_DIST) {
+        const opacity = 0.18 * (1 - dist / MAX_DIST);
+        const angle = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
+        const line = document.createElement('div');
+        line.className = 'c-line';
+        line.style.cssText = `
+          position: fixed;
+          height: 1px;
+          background: rgba(255,255,255,${opacity});
+          width: ${dist}px;
+          left: ${a.x}px;
+          top: ${a.y}px;
+          transform-origin: 0 50%;
+          transform: rotate(${angle}deg);
+          pointer-events: none;
+          z-index: 9996;
+        `;
+        document.body.appendChild(line);
+      }
+    }
+  });
+
+  // Fade out and remove all dots and lines when cursor leaves page
+  document.addEventListener('mouseleave', () => {
+    dots.forEach(d => d.el.remove());
+    document.querySelectorAll('.c-line').forEach(l => l.remove());
+    dots = [];
+  });
+</script>
+
+  
 <body>
 
 <header class="site-header">
@@ -74,37 +149,7 @@
   });
 </script>
 
-<!-- =====================================================
-     CURSOR GLOW
-     Soft white radial glow that follows the mouse cursor
-     ===================================================== -->
-<script>
-  const glow = document.createElement('div');
-  glow.style.cssText = `
-    position: fixed;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
-    transition: opacity 0.3s ease;
-    opacity: 0;
-  `;
-  document.body.appendChild(glow);
 
-  // Move glow to follow the cursor
-  document.addEventListener('mousemove', (e) => {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
-    glow.style.opacity = '1';
-  });
-
-  // Hide glow when cursor leaves the page
-  document.addEventListener('mouseleave', () => {
-    glow.style.opacity = '0';
-  });
 </script>
 
 </body>
