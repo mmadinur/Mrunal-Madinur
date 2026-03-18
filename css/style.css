@@ -406,6 +406,92 @@ figcaption {
   color: #f0ece4;
 }
 
+/* =========================================================
+   THEME TOGGLE BUTTON
+   ========================================================= */
+
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+
+/* =========================================================
+   LIGHT MODE OVERRIDES
+   ========================================================= */
+
+html.light {
+  --accent: #111111;
+  --muted: rgba(0, 0, 0, 0.45);
+  --bg: #f5f2ec;
+}
+
+html.light body {
+  background-color: #f5f2ec;
+  background-image: none;
+  color: #111111;
+}
+
+html.light .site-header {
+  background: #f5f2ec;
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light .article-list li {
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light .article-list li:first-child {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light .article-list a {
+  color: #111111;
+}
+
+html.light .article-list a::after {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+html.light .col-sidebar {
+  border-left-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light .sidebar-avatar {
+  background: rgba(0, 0, 0, 0.07);
+  color: #111111;
+}
+
+html.light .footer {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light .divider {
+  background: rgba(0, 0, 0, 0.18);
+}
+
+html.light .theme-toggle {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+html.light .theme-toggle:hover {
+  color: #111111;
+  background: rgba(0, 0, 0, 0.06);
+}
+
 
 /* =========================================================
    RESPONSIVE (Mobile)
