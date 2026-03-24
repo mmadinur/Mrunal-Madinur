@@ -194,6 +194,116 @@ main, .content {
   margin: 0 0 40px 0;
 }
 
+/* =========================================================
+   BOOKS PAGE — SHELF
+   ========================================================= */
+
+.shelf-wrap {
+  padding: 16px 16px 0;
+  background: rgba(255,255,255,0.015);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  border-bottom: 3px solid rgba(255,255,255,0.08);
+}
+
+.shelf {
+  display: flex;
+  gap: 5px;
+  align-items: flex-end;
+}
+
+.spine {
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.spine-inner {
+  border-radius: 2px 2px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: 'Playfair Display', serif;
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.spine:hover .spine-inner,
+.spine:focus .spine-inner {
+  transform: translateY(-8px);
+  filter: brightness(1.15);
+}
+
+.spine-empty .spine-inner {
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.15);
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a1a;
+  border: 0.5px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  padding: 10px 14px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 100;
+}
+
+.spine:hover .tooltip,
+.spine:focus .tooltip {
+  opacity: 1;
+}
+
+.tooltip-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #f0ece4;
+  margin-bottom: 2px;
+}
+
+.tooltip-author {
+  font-size: 11px;
+  color: rgba(240,236,228,0.45);
+  font-style: italic;
+}
+
+.shelf-hint {
+  font-family: 'Lora', serif;
+  font-size: 11px;
+  color: rgba(240,236,228,0.2);
+  font-style: italic;
+  margin: 6px 0 36px;
+}
+
+/* Light mode fixes */
+html.light .shelf-wrap {
+  background: rgba(0,0,0,0.02);
+  border-bottom-color: rgba(0,0,0,0.1);
+}
+
+html.light .tooltip {
+  background: #f5f2ec;
+  border-color: rgba(0,0,0,0.1);
+}
+
+html.light .tooltip-title {
+  color: #111;
+}
+
+html.light .shelf-hint {
+  color: rgba(0,0,0,0.3);
+}
 
 /* =========================================================
    ARTICLE LIST
