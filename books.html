@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Books — Mrunal Madinur</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="favicon.png?v=4">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <a class="site-title" href="index.html">Mrunal Madinur</a>
+    </div>
+    <nav class="primary-nav" role="navigation" aria-label="Primary">
+      <a href="index.html" class="nav-link">Writing</a>
+      <a href="books.html" class="nav-link" aria-current="page">Books</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+        <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <main>
+
+    <h1 class="hero-title">Books</h1>
+    <p class="lead">A shelf of things worth reading. Hover a spine to see details.</p>
+
+    <!-- CURRENTLY READING -->
+    <p class="eyebrow">Currently reading</p>
+    <div class="divider"></div>
+    <div class="shelf-wrap">
+      <div class="shelf">
+
+        <!-- Chaos Monkeys — orange/red -->
+        <div class="spine" tabindex="0">
+          <div class="spine-inner" style="background:linear-gradient(180deg,#e8440a,#c93208);color:rgba(255,255,255,0.9);width:34px;height:110px;">
+            CHAOS MONKEYS
+          </div>
+          <div class="tooltip">
+            <div class="tooltip-title">Chaos Monkeys</div>
+            <div class="tooltip-author">Antonio Garcia Martinez</div>
+          </div>
+        </div>
+
+        <!-- 48 Laws of Power — black/gold -->
+        <div class="spine" tabindex="0">
+          <div class="spine-inner" style="background:linear-gradient(180deg,#111,#0a0a0a);color:#c9a84c;border:1px solid rgba(201,168,76,0.3);width:38px;height:124px;">
+            48 LAWS OF POWER
+          </div>
+          <div class="tooltip">
+            <div class="tooltip-title">48 Laws of Power</div>
+            <div class="tooltip-author">Robert Greene</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <p class="shelf-hint">2 books in progress</p>
+
+    <!-- HAVE READ -->
+    <p class="eyebrow">Have read</p>
+    <div class="divider"></div>
+    <div class="shelf-wrap">
+      <div class="shelf">
+
+        <!-- The Alchemist — warm orange-red with gold text -->
+        <div class="spine" tabindex="0">
+          <div class="spine-inner" style="background:linear-gradient(180deg,#c8420d,#a8340a);color:#f0d060;text-shadow:0 0 4px rgba(0,0,0,0.4);width:32px;height:108px;">
+            THE ALCHEMIST
+          </div>
+          <div class="tooltip">
+            <div class="tooltip-title">The Alchemist</div>
+            <div class="tooltip-author">Paulo Coelho</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <p class="shelf-hint">1 book finished</p>
+
+    <!-- WANT TO READ -->
+    <p class="eyebrow">Want to read</p>
+    <div class="divider"></div>
+    <div class="shelf-wrap">
+      <div class="shelf">
+
+        <div class="spine spine-empty" tabindex="0">
+          <div class="spine-inner" style="width:30px;height:100px;">?</div>
+          <div class="tooltip">
+            <div class="tooltip-title">Coming soon</div>
+            <div class="tooltip-author">Your next read</div>
+          </div>
+        </div>
+        <div class="spine spine-empty" tabindex="0">
+          <div class="spine-inner" style="width:34px;height:112px;">?</div>
+          <div class="tooltip">
+            <div class="tooltip-title">Coming soon</div>
+            <div class="tooltip-author">Your next read</div>
+          </div>
+        </div>
+        <div class="spine spine-empty" tabindex="0">
+          <div class="spine-inner" style="width:28px;height:96px;">?</div>
+          <div class="tooltip">
+            <div class="tooltip-title">Coming soon</div>
+            <div class="tooltip-author">Your next read</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <p class="shelf-hint">More coming soon</p>
+
+  </main>
+  <footer class="footer">
+    <div>© 2026 Mrunal Madinur</div>
+  </footer>
+</div>
+
+<!-- LIGHT / DARK MODE TOGGLE -->
+<script>
+  const toggle = document.getElementById('themeToggle');
+  const icon = document.getElementById('themeIcon');
+
+  const moonPath = '<path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>';
+  const sunPath = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+
+  if (localStorage.getItem('theme') === 'light') {
+    document.documentElement.classList.add('light');
+    icon.innerHTML = sunPath;
+  }
+
+  toggle.addEventListener('click', () => {
+    const isLight = document.documentElement.classList.toggle('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    icon.innerHTML = isLight ? sunPath : moonPath;
+  });
+</script>
+
+</body>
+</html>
