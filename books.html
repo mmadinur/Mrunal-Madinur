@@ -30,7 +30,7 @@
   <main>
 
     <h1 class="hero-title">Books</h1>
-    <p class="lead">A shelf of things worth reading. Hover a spine to see details.</p>
+    <p class="lead">A shelf of things worth reading. Click a spine to see details.</p>
 
     <!-- CURRENTLY READING -->
     <p class="eyebrow">Currently reading</p>
@@ -38,25 +38,17 @@
     <div class="shelf-wrap">
       <div class="shelf">
 
-        <!-- Chaos Monkeys — orange/red -->
-        <div class="spine" tabindex="0">
-          <div class="spine-inner" style="background:linear-gradient(180deg,#e8440a,#c93208);color:rgba(255,255,255,0.9);width:34px;height:110px;">
-            CHAOS MONKEYS
-          </div>
-          <div class="tooltip">
-            <div class="tooltip-title">Chaos Monkeys</div>
-            <div class="tooltip-author">Antonio Garcia Martinez</div>
+        <!-- Chaos Monkeys -->
+        <div class="book-flip" onclick="openBook('chaos')">
+          <div class="book-inner">
+            <div class="book-spine-face" style="width:34px;height:110px;background:linear-gradient(180deg,#e8440a,#c93208);color:rgba(255,255,255,0.9);">CHAOS MONKEYS</div>
           </div>
         </div>
 
-        <!-- 48 Laws of Power — black/gold -->
-        <div class="spine" tabindex="0">
-          <div class="spine-inner" style="background:linear-gradient(180deg,#111,#0a0a0a);color:#c9a84c;border:1px solid rgba(201,168,76,0.3);width:38px;height:124px;">
-            48 LAWS OF POWER
-          </div>
-          <div class="tooltip">
-            <div class="tooltip-title">48 Laws of Power</div>
-            <div class="tooltip-author">Robert Greene</div>
+        <!-- 48 Laws of Power -->
+        <div class="book-flip" onclick="openBook('laws')">
+          <div class="book-inner">
+            <div class="book-spine-face" style="width:38px;height:124px;background:linear-gradient(180deg,#111,#0a0a0a);color:#c9a84c;border:1px solid rgba(201,168,76,0.3);">48 LAWS OF POWER</div>
           </div>
         </div>
 
@@ -70,49 +62,41 @@
     <div class="shelf-wrap">
       <div class="shelf">
 
-        <!-- The Alchemist — warm orange-red with gold text -->
-        <div class="spine" tabindex="0">
-          <div class="spine-inner" style="background:linear-gradient(180deg,#c8420d,#a8340a);color:#f0d060;text-shadow:0 0 4px rgba(0,0,0,0.4);width:32px;height:108px;">
-            THE ALCHEMIST
+        <!-- The Alchemist -->
+        <div class="book-flip" onclick="openBook('alchemist')">
+          <div class="book-inner">
+            <div class="book-spine-face" style="width:32px;height:108px;background:linear-gradient(180deg,#c8420d,#a8340a);color:#f0d060;">THE ALCHEMIST</div>
           </div>
-          <div class="tooltip">
-            <div class="tooltip-title">The Alchemist</div>
-            <div class="tooltip-author">Paulo Coelho</div>
+        </div>
+
+        <!-- Rich Dad Poor Dad -->
+        <div class="book-flip" onclick="openBook('richdad')">
+          <div class="book-inner">
+            <div class="book-spine-face" style="width:34px;height:114px;background:linear-gradient(180deg,#2a6b2a,#1a4a1a);color:#f5d020;">RICH DAD POOR DAD</div>
           </div>
         </div>
 
       </div>
     </div>
-    <p class="shelf-hint">1 book finished</p>
+    <p class="shelf-hint">2 books finished</p>
 
     <!-- WANT TO READ -->
     <p class="eyebrow">Want to read</p>
     <div class="divider"></div>
     <div class="shelf-wrap">
       <div class="shelf">
-
         <div class="spine spine-empty" tabindex="0">
           <div class="spine-inner" style="width:30px;height:100px;">?</div>
-          <div class="tooltip">
-            <div class="tooltip-title">Coming soon</div>
-            <div class="tooltip-author">Your next read</div>
-          </div>
+          <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
         </div>
         <div class="spine spine-empty" tabindex="0">
           <div class="spine-inner" style="width:34px;height:112px;">?</div>
-          <div class="tooltip">
-            <div class="tooltip-title">Coming soon</div>
-            <div class="tooltip-author">Your next read</div>
-          </div>
+          <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
         </div>
         <div class="spine spine-empty" tabindex="0">
           <div class="spine-inner" style="width:28px;height:96px;">?</div>
-          <div class="tooltip">
-            <div class="tooltip-title">Coming soon</div>
-            <div class="tooltip-author">Your next read</div>
-          </div>
+          <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
         </div>
-
       </div>
     </div>
     <p class="shelf-hint">More coming soon</p>
@@ -121,6 +105,20 @@
   <footer class="footer">
     <div>© 2026 Mrunal Madinur</div>
   </footer>
+</div>
+
+<!-- BOOK MODAL OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeBook(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeBook(null, true)">✕</button>
+    <div class="modal-cover" id="modalCover"></div>
+    <div class="modal-info">
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-author" id="modalAuthor"></div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-quote" id="modalQuote"></div>
+    </div>
+  </div>
 </div>
 
 <!-- LIGHT / DARK MODE TOGGLE -->
@@ -141,6 +139,60 @@
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
     icon.innerHTML = isLight ? sunPath : moonPath;
   });
+</script>
+
+<!-- BOOK MODAL SCRIPT -->
+<script>
+  const books = {
+    chaos: {
+      title: 'Chaos Monkeys',
+      author: 'Antonio Garcia Martinez',
+      cover: 'images/chaos-monkeys.jpg',
+      desc: 'A raw, insider account of Silicon Valley — startups, Facebook, and the chaos behind the curtain of the tech industry.',
+      quote: '"In the tech industry, as in nature, chaos is not the exception. It is the rule."'
+    },
+    laws: {
+      title: '48 Laws of Power',
+      author: 'Robert Greene',
+      cover: 'images/48-laws.jpg',
+      desc: 'A guide to power, strategy, and human nature. Greene distills 3,000 years of history into 48 timeless laws.',
+      quote: '"Never outshine the master. Make those above you feel comfortably superior."'
+    },
+    alchemist: {
+      title: 'The Alchemist',
+      author: 'Paulo Coelho',
+      cover: 'images/alchemist.jpg',
+      desc: 'A timeless story about following your dreams and listening to your heart. One of the most read books in history.',
+      quote: '"When you want something, all the universe conspires in helping you to achieve it."'
+    },
+    richdad: {
+      title: 'Rich Dad Poor Dad',
+      author: 'Robert Kiyosaki',
+      cover: 'images/rich-dad.jpg',
+      desc: 'A personal finance classic that challenges conventional thinking about money, assets, and building wealth.',
+      quote: '"The poor and the middle class work for money. The rich have money work for them."'
+    }
+  };
+
+  function openBook(id) {
+    const b = books[id];
+    const cover = document.getElementById('modalCover');
+    cover.innerHTML = `<img src="${b.cover}" style="width:90px;height:130px;object-fit:cover;border-radius:3px;box-shadow:4px 4px 20px rgba(0,0,0,0.6);">`;
+    cover.style.animation = 'none';
+    cover.offsetHeight;
+    cover.style.animation = 'flipIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
+    document.getElementById('modalTitle').textContent = b.title;
+    document.getElementById('modalAuthor').textContent = b.author;
+    document.getElementById('modalDesc').textContent = b.desc;
+    document.getElementById('modalQuote').textContent = b.quote;
+    document.getElementById('overlay').classList.add('active');
+  }
+
+  function closeBook(e, force) {
+    if (force || (e && e.target === document.getElementById('overlay'))) {
+      document.getElementById('overlay').classList.remove('active');
+    }
+  }
 </script>
 
 </body>
