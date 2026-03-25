@@ -6,6 +6,209 @@
   <title>Books — Mrunal Madinur</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/png" href="favicon.png?v=4">
+  <style>
+    /* ---- SHELF ---- */
+    .shelf-wrap {
+      padding: 16px 16px 0;
+      background: rgba(255,255,255,0.015);
+      border-radius: 6px;
+      margin-bottom: 8px;
+      border-bottom: 3px solid rgba(255,255,255,0.08);
+    }
+    .shelf {
+      display: flex;
+      gap: 5px;
+      align-items: flex-end;
+    }
+    .shelf-hint {
+      font-family: 'Lora', serif;
+      font-size: 11px;
+      color: rgba(240,236,228,0.2);
+      font-style: italic;
+      margin: 6px 0 36px;
+    }
+
+    /* ---- BOOK FLIP ---- */
+    .book-flip {
+      perspective: 600px;
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .book-inner {
+      transform-style: preserve-3d;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .book-flip:hover .book-inner {
+      transform: rotateY(-25deg);
+    }
+    .book-spine-face {
+      border-radius: 2px 2px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: 'Playfair Display', serif;
+      font-size: 8px;
+      letter-spacing: 0.06em;
+    }
+
+    /* ---- EMPTY SPINES ---- */
+    .spine {
+      position: relative;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .spine-inner {
+      border-radius: 2px 2px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: 'Playfair Display', serif;
+      font-size: 8px;
+      letter-spacing: 0.06em;
+    }
+    .spine-empty .spine-inner {
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.15);
+    }
+
+    /* ---- TOOLTIPS ---- */
+    .tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a1a1a;
+      border: 0.5px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      padding: 10px 14px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+      z-index: 100;
+    }
+    .book-flip:hover .tooltip,
+    .spine:hover .tooltip {
+      opacity: 1;
+    }
+    .tooltip-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #f0ece4;
+      margin-bottom: 2px;
+    }
+    .tooltip-author {
+      font-size: 11px;
+      color: rgba(240,236,228,0.45);
+      font-style: italic;
+    }
+
+    /* ---- MODAL OVERLAY ---- */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+    .overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal {
+      background: #111;
+      border: 0.5px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 480px;
+      width: 90%;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      transform: scale(0.92) translateY(12px);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+    .overlay.active .modal {
+      transform: scale(1) translateY(0);
+    }
+    @keyframes flipIn {
+      from { transform: rotateY(-90deg); opacity: 0; }
+      to   { transform: rotateY(0deg);   opacity: 1; }
+    }
+    .modal-cover {
+      min-width: 90px;
+      animation: flipIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    .modal-info { flex: 1; }
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #f0ece4;
+      margin: 0 0 4px;
+    }
+    .modal-author {
+      font-size: 13px;
+      color: rgba(240,236,228,0.45);
+      font-style: italic;
+      margin: 0 0 14px;
+    }
+    .modal-desc {
+      font-size: 13px;
+      color: rgba(240,236,228,0.65);
+      line-height: 1.7;
+      margin: 0 0 16px;
+    }
+    .modal-quote {
+      border-left: 2px solid rgba(255,255,255,0.15);
+      padding-left: 12px;
+      font-size: 12px;
+      color: rgba(240,236,228,0.45);
+      font-style: italic;
+      line-height: 1.65;
+    }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.3);
+      font-size: 18px;
+      cursor: pointer;
+      transition: color 0.15s;
+      line-height: 1;
+    }
+    .modal-close:hover { color: #f0ece4; }
+
+    /* ---- LIGHT MODE ---- */
+    html.light .shelf-wrap { background: rgba(0,0,0,0.02); border-bottom-color: rgba(0,0,0,0.1); }
+    html.light .shelf-hint { color: rgba(0,0,0,0.3); }
+    html.light .tooltip { background: #f5f2ec; border-color: rgba(0,0,0,0.1); }
+    html.light .tooltip-title { color: #111; }
+    html.light .tooltip-author { color: rgba(0,0,0,0.45); }
+    html.light .modal { background: #f5f2ec; border-color: rgba(0,0,0,0.1); }
+    html.light .modal-title { color: #111; }
+    html.light .modal-author { color: rgba(0,0,0,0.45); }
+    html.light .modal-desc { color: rgba(0,0,0,0.6); }
+    html.light .modal-quote { color: rgba(0,0,0,0.4); border-left-color: rgba(0,0,0,0.15); }
+    html.light .modal-close { color: rgba(0,0,0,0.3); }
+    html.light .modal-close:hover { color: #111; }
+  </style>
 </head>
 <body>
 
@@ -29,93 +232,89 @@
 <div class="container">
   <main>
 
-   <h1 class="hero-title">Books</h1>
-<p class="lead">A shelf of things worth reading. Click a spine to see details.</p>
+    <h1 class="hero-title">Books</h1>
+    <p class="lead">A shelf of things worth reading. Click a spine to see details.</p>
 
-<!-- CURRENTLY READING -->
-<p class="eyebrow">Currently reading</p>
-<div class="divider"></div>
-<div class="shelf-wrap">
-  <div class="shelf">
+    <!-- CURRENTLY READING -->
+    <p class="eyebrow">Currently reading</p>
+    <div class="divider"></div>
+    <div class="shelf-wrap">
+      <div class="shelf">
 
-    <!-- Chaos Monkeys -->
-    <div class="book-flip" onclick="openBook('chaos')">
-      <div class="book-inner">
-        <div class="book-spine-face" style="width:34px;height:110px;background:linear-gradient(180deg,#e8440a,#c93208);color:rgba(255,255,255,0.9);">CHAOS MONKEYS</div>
-      </div>
-      <div class="tooltip">
-        <div class="tooltip-title">Chaos Monkeys</div>
-        <div class="tooltip-author">Antonio Garcia Martinez</div>
-      </div>
-    </div>
+        <div class="book-flip" onclick="openBook('chaos')">
+          <div class="book-inner">
+            <div class="book-spine-face" style="width:34px;height:110px;background:linear-gradient(180deg,#e8440a,#c93208);color:rgba(255,255,255,0.9);">CHAOS MONKEYS</div>
+          </div>
+          <div class="tooltip">
+            <div class="tooltip-title">Chaos Monkeys</div>
+            <div class="tooltip-author">Antonio Garcia Martinez</div>
+          </div>
+        </div>
 
-    <!-- 48 Laws of Power -->
-    <div class="book-flip" onclick="openBook('laws')">
-      <div class="book-inner">
-        <div class="book-spine-face" style="width:38px;height:124px;background:linear-gradient(180deg,#111,#0a0a0a);color:#c9a84c;border:1px solid rgba(201,168,76,0.3);">48 LAWS OF POWER</div>
-      </div>
-      <div class="tooltip">
-        <div class="tooltip-title">48 Laws of Power</div>
-        <div class="tooltip-author">Robert Greene</div>
-      </div>
-    </div>
+        <div class="book-flip" onclick="openBook('laws')">
+          <div class="book-inner">
+            <div class="book-spine-face" style="width:38px;height:124px;background:linear-gradient(180deg,#111,#0a0a0a);color:#c9a84c;border:1px solid rgba(201,168,76,0.3);">48 LAWS OF POWER</div>
+          </div>
+          <div class="tooltip">
+            <div class="tooltip-title">48 Laws of Power</div>
+            <div class="tooltip-author">Robert Greene</div>
+          </div>
+        </div>
 
-  </div>
-</div>
-<p class="shelf-hint">2 books in progress</p>
-
-<!-- HAVE READ -->
-<p class="eyebrow">Have read</p>
-<div class="divider"></div>
-<div class="shelf-wrap">
-  <div class="shelf">
-
-    <!-- The Alchemist -->
-    <div class="book-flip" onclick="openBook('alchemist')">
-      <div class="book-inner">
-        <div class="book-spine-face" style="width:32px;height:108px;background:linear-gradient(180deg,#c8420d,#a8340a);color:#f0d060;">THE ALCHEMIST</div>
-      </div>
-      <div class="tooltip">
-        <div class="tooltip-title">The Alchemist</div>
-        <div class="tooltip-author">Paulo Coelho</div>
       </div>
     </div>
+    <p class="shelf-hint">2 books in progress</p>
 
-    <!-- Rich Dad Poor Dad -->
-    <div class="book-flip" onclick="openBook('richdad')">
-      <div class="book-inner">
-        <div class="book-spine-face" style="width:34px;height:114px;background:linear-gradient(180deg,#2a6b2a,#1a4a1a);color:#f5d020;">RICH DAD POOR DAD</div>
+    <!-- HAVE READ -->
+    <p class="eyebrow">Have read</p>
+    <div class="divider"></div>
+    <div class="shelf-wrap">
+      <div class="shelf">
+
+        <div class="book-flip" onclick="openBook('alchemist')">
+          <div class="book-inner">
+            <div class="book-spine-face" style="width:32px;height:108px;background:linear-gradient(180deg,#c8420d,#a8340a);color:#f0d060;">THE ALCHEMIST</div>
+          </div>
+          <div class="tooltip">
+            <div class="tooltip-title">The Alchemist</div>
+            <div class="tooltip-author">Paulo Coelho</div>
+          </div>
+        </div>
+
+        <div class="book-flip" onclick="openBook('richdad')">
+          <div class="book-inner">
+            <div class="book-spine-face" style="width:34px;height:114px;background:linear-gradient(180deg,#2a6b2a,#1a4a1a);color:#f5d020;">RICH DAD POOR DAD</div>
+          </div>
+          <div class="tooltip">
+            <div class="tooltip-title">Rich Dad Poor Dad</div>
+            <div class="tooltip-author">Robert Kiyosaki</div>
+          </div>
+        </div>
+
       </div>
-      <div class="tooltip">
-        <div class="tooltip-title">Rich Dad Poor Dad</div>
-        <div class="tooltip-author">Robert Kiyosaki</div>
+    </div>
+    <p class="shelf-hint">2 books finished</p>
+
+    <!-- WANT TO READ -->
+    <p class="eyebrow">Want to read</p>
+    <div class="divider"></div>
+    <div class="shelf-wrap">
+      <div class="shelf">
+        <div class="spine spine-empty" tabindex="0">
+          <div class="spine-inner" style="width:30px;height:100px;">?</div>
+          <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
+        </div>
+        <div class="spine spine-empty" tabindex="0">
+          <div class="spine-inner" style="width:34px;height:112px;">?</div>
+          <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
+        </div>
+        <div class="spine spine-empty" tabindex="0">
+          <div class="spine-inner" style="width:28px;height:96px;">?</div>
+          <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
+        </div>
       </div>
     </div>
-
-  </div>
-</div>
-<p class="shelf-hint">2 books finished</p>
-
-<!-- WANT TO READ -->
-<p class="eyebrow">Want to read</p>
-<div class="divider"></div>
-<div class="shelf-wrap">
-  <div class="shelf">
-    <div class="spine spine-empty" tabindex="0">
-      <div class="spine-inner" style="width:30px;height:100px;">?</div>
-      <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
-    </div>
-    <div class="spine spine-empty" tabindex="0">
-      <div class="spine-inner" style="width:34px;height:112px;">?</div>
-      <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
-    </div>
-    <div class="spine spine-empty" tabindex="0">
-      <div class="spine-inner" style="width:28px;height:96px;">?</div>
-      <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
-    </div>
-  </div>
-</div>
-<p class="shelf-hint">More coming soon</p>
+    <p class="shelf-hint">More coming soon</p>
 
   </main>
   <footer class="footer">
@@ -123,7 +322,7 @@
   </footer>
 </div>
 
-<!-- BOOK MODAL OVERLAY -->
+<!-- MODAL -->
 <div class="overlay" id="overlay" onclick="closeBook(event)">
   <div class="modal" id="modal">
     <button class="modal-close" onclick="closeBook(null, true)">✕</button>
@@ -137,19 +336,16 @@
   </div>
 </div>
 
-<!-- LIGHT / DARK MODE TOGGLE -->
+<!-- LIGHT / DARK MODE -->
 <script>
   const toggle = document.getElementById('themeToggle');
   const icon = document.getElementById('themeIcon');
-
   const moonPath = '<path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>';
   const sunPath = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
-
   if (localStorage.getItem('theme') === 'light') {
     document.documentElement.classList.add('light');
     icon.innerHTML = sunPath;
   }
-
   toggle.addEventListener('click', () => {
     const isLight = document.documentElement.classList.toggle('light');
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
@@ -157,13 +353,15 @@
   });
 </script>
 
-<!-- BOOK MODAL SCRIPT -->
+<!-- BOOK MODAL -->
 <script>
   const books = {
     chaos: {
       title: 'Chaos Monkeys',
       author: 'Antonio Garcia Martinez',
       cover: 'images/chaos-monkeys.jpg',
+      spine: 'linear-gradient(180deg,#e8440a,#c93208)',
+      spineColor: 'rgba(255,255,255,0.9)',
       desc: 'A raw, insider account of Silicon Valley — startups, Facebook, and the chaos behind the curtain of the tech industry.',
       quote: '"In the tech industry, as in nature, chaos is not the exception. It is the rule."'
     },
@@ -171,6 +369,8 @@
       title: '48 Laws of Power',
       author: 'Robert Greene',
       cover: 'images/48-laws.jpg',
+      spine: 'linear-gradient(180deg,#111,#0a0a0a)',
+      spineColor: '#c9a84c',
       desc: 'A guide to power, strategy, and human nature. Greene distills 3,000 years of history into 48 timeless laws.',
       quote: '"Never outshine the master. Make those above you feel comfortably superior."'
     },
@@ -178,6 +378,8 @@
       title: 'The Alchemist',
       author: 'Paulo Coelho',
       cover: 'images/alchemist.jpg',
+      spine: 'linear-gradient(180deg,#c8420d,#a8340a)',
+      spineColor: '#f0d060',
       desc: 'A timeless story about following your dreams and listening to your heart. One of the most read books in history.',
       quote: '"When you want something, all the universe conspires in helping you to achieve it."'
     },
@@ -185,6 +387,8 @@
       title: 'Rich Dad Poor Dad',
       author: 'Robert Kiyosaki',
       cover: 'images/rich-dad.jpg',
+      spine: 'linear-gradient(180deg,#2a6b2a,#1a4a1a)',
+      spineColor: '#f5d020',
       desc: 'A personal finance classic that challenges conventional thinking about money, assets, and building wealth.',
       quote: '"The poor and the middle class work for money. The rich have money work for them."'
     }
@@ -193,7 +397,9 @@
   function openBook(id) {
     const b = books[id];
     const cover = document.getElementById('modalCover');
-    cover.innerHTML = `<img src="${b.cover}" style="width:90px;height:130px;object-fit:cover;border-radius:3px;box-shadow:4px 4px 20px rgba(0,0,0,0.6);">`;
+    cover.innerHTML = `<img src="${b.cover}"
+      style="width:90px;height:130px;object-fit:cover;border-radius:3px;box-shadow:4px 4px 20px rgba(0,0,0,0.6);"
+      onerror="this.outerHTML='<div style=\'width:90px;height:130px;background:${b.spine};border-radius:3px;box-shadow:4px 4px 20px rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;font-family:Playfair Display,serif;font-size:9px;color:${b.spineColor};letter-spacing:0.06em;padding:8px;text-align:center;\'>${b.title}</div>'">`;
     cover.style.animation = 'none';
     cover.offsetHeight;
     cover.style.animation = 'flipIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
