@@ -29,77 +29,93 @@
 <div class="container">
   <main>
 
-    <h1 class="hero-title">Books</h1>
-    <p class="lead">A shelf of things worth reading. Click a spine to see details.</p>
+   <h1 class="hero-title">Books</h1>
+<p class="lead">A shelf of things worth reading. Click a spine to see details.</p>
 
-    <!-- CURRENTLY READING -->
-    <p class="eyebrow">Currently reading</p>
-    <div class="divider"></div>
-    <div class="shelf-wrap">
-      <div class="shelf">
+<!-- CURRENTLY READING -->
+<p class="eyebrow">Currently reading</p>
+<div class="divider"></div>
+<div class="shelf-wrap">
+  <div class="shelf">
 
-        <!-- Chaos Monkeys -->
-        <div class="book-flip" onclick="openBook('chaos')">
-          <div class="book-inner">
-            <div class="book-spine-face" style="width:34px;height:110px;background:linear-gradient(180deg,#e8440a,#c93208);color:rgba(255,255,255,0.9);">CHAOS MONKEYS</div>
-          </div>
-        </div>
-
-        <!-- 48 Laws of Power -->
-        <div class="book-flip" onclick="openBook('laws')">
-          <div class="book-inner">
-            <div class="book-spine-face" style="width:38px;height:124px;background:linear-gradient(180deg,#111,#0a0a0a);color:#c9a84c;border:1px solid rgba(201,168,76,0.3);">48 LAWS OF POWER</div>
-          </div>
-        </div>
-
+    <!-- Chaos Monkeys -->
+    <div class="book-flip" onclick="openBook('chaos')">
+      <div class="book-inner">
+        <div class="book-spine-face" style="width:34px;height:110px;background:linear-gradient(180deg,#e8440a,#c93208);color:rgba(255,255,255,0.9);">CHAOS MONKEYS</div>
+      </div>
+      <div class="tooltip">
+        <div class="tooltip-title">Chaos Monkeys</div>
+        <div class="tooltip-author">Antonio Garcia Martinez</div>
       </div>
     </div>
-    <p class="shelf-hint">2 books in progress</p>
 
-    <!-- HAVE READ -->
-    <p class="eyebrow">Have read</p>
-    <div class="divider"></div>
-    <div class="shelf-wrap">
-      <div class="shelf">
-
-        <!-- The Alchemist -->
-        <div class="book-flip" onclick="openBook('alchemist')">
-          <div class="book-inner">
-            <div class="book-spine-face" style="width:32px;height:108px;background:linear-gradient(180deg,#c8420d,#a8340a);color:#f0d060;">THE ALCHEMIST</div>
-          </div>
-        </div>
-
-        <!-- Rich Dad Poor Dad -->
-        <div class="book-flip" onclick="openBook('richdad')">
-          <div class="book-inner">
-            <div class="book-spine-face" style="width:34px;height:114px;background:linear-gradient(180deg,#2a6b2a,#1a4a1a);color:#f5d020;">RICH DAD POOR DAD</div>
-          </div>
-        </div>
-
+    <!-- 48 Laws of Power -->
+    <div class="book-flip" onclick="openBook('laws')">
+      <div class="book-inner">
+        <div class="book-spine-face" style="width:38px;height:124px;background:linear-gradient(180deg,#111,#0a0a0a);color:#c9a84c;border:1px solid rgba(201,168,76,0.3);">48 LAWS OF POWER</div>
+      </div>
+      <div class="tooltip">
+        <div class="tooltip-title">48 Laws of Power</div>
+        <div class="tooltip-author">Robert Greene</div>
       </div>
     </div>
-    <p class="shelf-hint">2 books finished</p>
 
-    <!-- WANT TO READ -->
-    <p class="eyebrow">Want to read</p>
-    <div class="divider"></div>
-    <div class="shelf-wrap">
-      <div class="shelf">
-        <div class="spine spine-empty" tabindex="0">
-          <div class="spine-inner" style="width:30px;height:100px;">?</div>
-          <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
-        </div>
-        <div class="spine spine-empty" tabindex="0">
-          <div class="spine-inner" style="width:34px;height:112px;">?</div>
-          <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
-        </div>
-        <div class="spine spine-empty" tabindex="0">
-          <div class="spine-inner" style="width:28px;height:96px;">?</div>
-          <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
-        </div>
+  </div>
+</div>
+<p class="shelf-hint">2 books in progress</p>
+
+<!-- HAVE READ -->
+<p class="eyebrow">Have read</p>
+<div class="divider"></div>
+<div class="shelf-wrap">
+  <div class="shelf">
+
+    <!-- The Alchemist -->
+    <div class="book-flip" onclick="openBook('alchemist')">
+      <div class="book-inner">
+        <div class="book-spine-face" style="width:32px;height:108px;background:linear-gradient(180deg,#c8420d,#a8340a);color:#f0d060;">THE ALCHEMIST</div>
+      </div>
+      <div class="tooltip">
+        <div class="tooltip-title">The Alchemist</div>
+        <div class="tooltip-author">Paulo Coelho</div>
       </div>
     </div>
-    <p class="shelf-hint">More coming soon</p>
+
+    <!-- Rich Dad Poor Dad -->
+    <div class="book-flip" onclick="openBook('richdad')">
+      <div class="book-inner">
+        <div class="book-spine-face" style="width:34px;height:114px;background:linear-gradient(180deg,#2a6b2a,#1a4a1a);color:#f5d020;">RICH DAD POOR DAD</div>
+      </div>
+      <div class="tooltip">
+        <div class="tooltip-title">Rich Dad Poor Dad</div>
+        <div class="tooltip-author">Robert Kiyosaki</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<p class="shelf-hint">2 books finished</p>
+
+<!-- WANT TO READ -->
+<p class="eyebrow">Want to read</p>
+<div class="divider"></div>
+<div class="shelf-wrap">
+  <div class="shelf">
+    <div class="spine spine-empty" tabindex="0">
+      <div class="spine-inner" style="width:30px;height:100px;">?</div>
+      <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
+    </div>
+    <div class="spine spine-empty" tabindex="0">
+      <div class="spine-inner" style="width:34px;height:112px;">?</div>
+      <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
+    </div>
+    <div class="spine spine-empty" tabindex="0">
+      <div class="spine-inner" style="width:28px;height:96px;">?</div>
+      <div class="tooltip"><div class="tooltip-title">Coming soon</div><div class="tooltip-author">Your next read</div></div>
+    </div>
+  </div>
+</div>
+<p class="shelf-hint">More coming soon</p>
 
   </main>
   <footer class="footer">
