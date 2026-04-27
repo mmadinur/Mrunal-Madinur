@@ -401,6 +401,27 @@ html.light .shelf-hint {
 }
 
 /* =========================================================
+   Bay Trip Table
+   ========================================================= */
+
+.blog-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.blog-table th,
+.blog-table td {
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 0.6rem 1rem;
+  text-align: center;
+}
+
+.blog-table td:first-child {
+  text-align: left;
+}
+
+/* =========================================================
    Perspectives BLOG IMAGES
    ========================================================= */
 
