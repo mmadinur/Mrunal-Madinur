@@ -86,4 +86,11 @@
     document.documentElement.classList.add('light');
     icon.innerHTML = sunPath;
   }
-  toggle.addEventListene
+  toggle.addEventListener('click', () => {
+    const isLight = document.documentElement.classList.toggle('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    icon.innerHTML = isLight ? sunPath : moonPath;
+  });
+</script>
+</body>
+</html>
